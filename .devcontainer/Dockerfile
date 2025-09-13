@@ -75,7 +75,7 @@ RUN mkdir -p ${HOME}/.vscode-server/extensions
 
 # Install nvm.
 ENV NVM_DIR ${HOME}/.nvm
-ENV NODE_VERSION 20.0.0
+ENV NODE_VERSION 20.10.0
 
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash \
   && . "$NVM_DIR/nvm.sh"  \
@@ -108,8 +108,20 @@ RUN curl -s https://fluxcd.io/install.sh | sudo bash
 # Install Rust to get access to the Rust CLI tools.
 RUN curl https://sh.rustup.rs/?version=1.66 -sSf | bash -s -- -y
 ENV PATH="${HOME}/.cargo/bin:${PATH}"
-RUN rustup target add wasm32-wasi
+RUN rustup target add wasm32-wasi || true
 RUN rustup target add wasm32-unknown-unknown
+
+# Install Emscripten for WASM builds
+RUN git clone https://github.com/emscripten-core/emsdk.git ${HOME}/emsdk \
+  && cd ${HOME}/emsdk \
+  && ./emsdk install 3.1.45 \
+  && ./emsdk activate 3.1.45 \
+  && echo 'source ${HOME}/emsdk/emsdk_env.sh' >> ${HOME}/.bashrc
+
+# Устанавливаем переменные окружения для Emscripten
+ENV EMSDK ${HOME}/emsdk
+ENV PATH ${HOME}/emsdk:${HOME}/emsdk/upstream/emscripten:$PATH
+ENV CPLUS_INCLUDE_PATH ${HOME}/emsdk/upstream/emscripten/system/include
 
 # Install some helpful WASM inspection tools like wasm2wat
 RUN sudo apt install wabt
@@ -119,9 +131,9 @@ RUN sudo apt install wabt
 # Ubuntu 22.
 ARG REDIS_VERSION=redis-7.0.8
 RUN curl -s https://download.redis.io/releases/${REDIS_VERSION}.tar.gz | tar xvz -C ${HOME} \
-    && make -j`nproc` -C ${HOME}/${REDIS_VERSION} \
-    && sudo make install -C ${HOME}/${REDIS_VERSION} \
-    && rm -rf ${HOME}/${REDIS_VERSION}
+  && make -j`nproc` -C ${HOME}/${REDIS_VERSION} \
+  && sudo make install -C ${HOME}/${REDIS_VERSION} \
+  && rm -rf ${HOME}/${REDIS_VERSION}
 
 # Remember our console history between sessions.
 ENV COMMAND_HISTORY_DIR ${HOME}/commandhistory

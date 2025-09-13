@@ -1,32 +1,6 @@
 // GENERATED: This file is generated from types.ts.j2. Do not modify directly.
-// Content Hash: 1def4e7a68650a8bceb0668ab3147bf2
+// Content Hash: 3c90c28fb387093a4576faf66af6174e
 
-export type { ItemAndCount, ReadonlyItemAndCount } from "@/shared/ecs/extern";
-export {
-  zItemAndCount,
-  defaultItemAndCount,
-  serializeItemAndCount,
-  deserializeItemAndCount,
-} from "@/shared/ecs/extern";
-import {
-  ItemAndCount,
-  ReadonlyItemAndCount,
-  zItemAndCount,
-  defaultItemAndCount,
-  serializeItemAndCount,
-  deserializeItemAndCount,
-} from "@/shared/ecs/extern";
-import { ReadonlyBiomesId, BiomesId, zBiomesId } from "@/shared/ids";
-import {
-  defaultBiomesId,
-  serializeBiomesId,
-  deserializeBiomesId,
-} from "@/shared/ecs/extern";
-export {
-  defaultBiomesId,
-  serializeBiomesId,
-  deserializeBiomesId,
-} from "@/shared/ecs/extern";
 export type { Item, ReadonlyItem } from "@/shared/ecs/extern";
 export {
   zItem,
@@ -42,20 +16,16 @@ import {
   serializeItem,
   deserializeItem,
 } from "@/shared/ecs/extern";
-export type { ShardId, ReadonlyShardId } from "@/shared/ecs/extern";
-export {
-  zShardId,
-  defaultShardId,
-  serializeShardId,
-  deserializeShardId,
-} from "@/shared/ecs/extern";
+import { ReadonlyBiomesId, BiomesId, zBiomesId } from "@/shared/ids";
 import {
-  ShardId,
-  ReadonlyShardId,
-  zShardId,
-  defaultShardId,
-  serializeShardId,
-  deserializeShardId,
+  defaultBiomesId,
+  serializeBiomesId,
+  deserializeBiomesId,
+} from "@/shared/ecs/extern";
+export {
+  defaultBiomesId,
+  serializeBiomesId,
+  deserializeBiomesId,
 } from "@/shared/ecs/extern";
 export type {
   TriggerStateMap,
@@ -74,6 +44,36 @@ import {
   defaultTriggerStateMap,
   serializeTriggerStateMap,
   deserializeTriggerStateMap,
+} from "@/shared/ecs/extern";
+export type { ItemAndCount, ReadonlyItemAndCount } from "@/shared/ecs/extern";
+export {
+  zItemAndCount,
+  defaultItemAndCount,
+  serializeItemAndCount,
+  deserializeItemAndCount,
+} from "@/shared/ecs/extern";
+import {
+  ItemAndCount,
+  ReadonlyItemAndCount,
+  zItemAndCount,
+  defaultItemAndCount,
+  serializeItemAndCount,
+  deserializeItemAndCount,
+} from "@/shared/ecs/extern";
+export type { ShardId, ReadonlyShardId } from "@/shared/ecs/extern";
+export {
+  zShardId,
+  defaultShardId,
+  serializeShardId,
+  deserializeShardId,
+} from "@/shared/ecs/extern";
+import {
+  ShardId,
+  ReadonlyShardId,
+  zShardId,
+  defaultShardId,
+  serializeShardId,
+  deserializeShardId,
 } from "@/shared/ecs/extern";
 import { z } from "zod";
 import { isInteger } from "lodash";

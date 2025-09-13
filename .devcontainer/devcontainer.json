@@ -11,10 +11,10 @@
         "terminal.integrated.profiles.linux": {
           "bash": {
             "path": "bash",
-            "icon": "terminal-bash",
+            "icon": "terminal-bash"
           }
         },
-        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.defaultProfile.linux": "bash"
       },
       "extensions": [
         // Extensions for TypeScript coding environment.
@@ -46,7 +46,7 @@
     // C++) to work in the container.
     "--cap-add=SYS_PTRACE",
     "--security-opt",
-    "seccomp=unconfined",
+  "seccomp=unconfined"
   ],
   // Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-in-docker.
   "mounts": [
@@ -69,16 +69,16 @@
     "source=biomes-home-local,target=/home/docker-user/.cache,type=volume",
     // Remember application config options, and in particular the
     // gcloud CLI settings/credential tokens.
-    "source=biomes-home-local,target=/home/docker-user/.config,type=volume",
+  "source=biomes-home-local,target=/home/docker-user/.config,type=volume"
   ],
   // Since some of the volumes specified above need to be accessed by the
   // remoteUser (as opposed to root), we assign ownership of them after the
   // docker image is created.
   "postCreateCommand": "sudo chown docker-user node_modules && sudo chown docker-user .next && sudo chown docker-user ${HOME}/commandhistory && sudo chown docker-user voxeloo/build_js && sudo chown docker-user ${HOME}/.local && sudo chown docker-user ${HOME}/.config && git lfs pull",
   // Ensure node_modules is up-to-date each time we load up this workspace.
-  "postAttachCommand": "yarn install && pip install -r requirements.txt",
+  "postAttachCommand": "(yarn install || npm install) && pip install -r requirements.txt",
   // This matches up with the user created in the Dockerfile. For some reason
   // the node binary complains with weird permission denied errors when run
   // as root.
-  "remoteUser": "docker-user",
+  "remoteUser": "docker-user"
 }
